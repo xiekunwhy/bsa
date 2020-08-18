@@ -96,16 +96,28 @@ if(defined $sim_file){
 	}else{
 		$sim_depth ||= "max";
 	}
-	$simhead =~ s/A_Index/$bulk1\_Index/g;
-	$simhead =~ s/B_Index/$bulk2\_Index/g;
+	my @simh = split(/\t/, $simhead);
+	for (my $i = 0; $i < @simh; $i++) {
+		my @nindex = split(/\_/, $simh[$i]);
+		my $lasti = scalar(@nindex) - 2;
+		my $tmp = join("_", @nindex[0..$lasti]);
+		if($tmp eq "A_Index"){
+			$simh[$i] = "$bulk1\_Index\_$nindex[$lasti+1]";
+		}elsif($tmp eq "B_Index"){
+			$simh[$i] = "$bulk2\_Index\_$nindex[$lasti+1]";
+		}
+	}
+	$simhead = join("\t", @simh);
 	if(defined $parent1 && $parent1 eq $bulk1){ ## for mutmap
 		my @muthead;
 		my @cis = split(/\t/, $simhead);
 		for (my $i = 0; $i < @cis; $i++) {
-			my $tmp = $cis[$i];
-			if($tmp =~ /$bulk2\_Index/){
+			my @nindex = split(/\_/, $cis[$i]);
+			my $lasti = scalar(@nindex) - 2;
+			my $tmp = join("_", @nindex[0..$lasti]);
+			if($tmp == "$bulk2\_Index"){
 				push(@mutsim, $i);
-				push(@muthead, $tmp);
+				push(@muthead, $cis[$i]);
 			}
 		}
 		$simhead = join("\t", @muthead);
@@ -882,4 +894,15 @@ sub run_or_die()
 		exit(1);
 	}
 	&show_log("done\n");
+}
+
+# qsub
+sub qsub()
+{
+	my ($sh, $vf, $maxjob, $queue) = @_;
+	$vf ||= "2G";
+	$maxjob ||= 20;
+	$queue ||= "all.q,avx.q";
+	my $cmd_qsub = "/Bio/bin/qsub-sge.pl --convert no --queue $queue --interval 1 --maxjob $maxjob --resource vf=$vf $sh";
+	&run_or_die($cmd_qsub);
 }

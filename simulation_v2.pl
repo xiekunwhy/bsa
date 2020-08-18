@@ -187,13 +187,3 @@ sub run_or_die()
 	&show_log("done\n");
 }
 
-# qsub
-sub qsub()
-{
-	my ($sh, $vf, $maxjob, $queue) = @_;
-	$vf ||= "2G";
-	$maxjob ||= 20;
-	$queue ||= "all.q,avx.q";
-	my $cmd_qsub = "/Bio/bin/qsub-sge.pl --convert no --queue $queue --interval 1 --maxjob $maxjob --resource vf=$vf $sh";
-	&run_or_die($cmd_qsub);
-}
