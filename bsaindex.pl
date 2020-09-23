@@ -115,7 +115,7 @@ if(defined $sim_file){
 			my @nindex = split(/\_/, $cis[$i]);
 			my $lasti = scalar(@nindex) - 2;
 			my $tmp = join("_", @nindex[0..$lasti]);
-			if($tmp == "$bulk2\_Index"){
+			if($tmp eq "$bulk2\_Index"){
 				push(@mutsim, $i);
 				push(@muthead, $cis[$i]);
 			}
