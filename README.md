@@ -142,7 +142,7 @@ chr10	12996920
 
 └── bsa.index.mean.xls ## snp-index sliding window results
 
-after this step, you can use cmplot(https://github.com/YinLiLin/CMplot) to plot widow results
+after this step, you can use cmplot(https://github.com/YinLiLin/CMplot) to plot window results
 
 # step 4 get qtl region
 ### get help infomation
