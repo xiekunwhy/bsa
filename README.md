@@ -33,8 +33,9 @@ Function: simulation and get delta snpindex confidence intervals
         -h            help document
 ```
 ### command line
+```
 perl simulation_v2.pl -k snp -od bsa -pt ril -s1 50 -s2 50 -md 10 -xd 500 -rb /path/to/your/Rscript
-
+```
 ### results
 snp.cisim.xls is the main result file
 
@@ -67,23 +68,18 @@ Function: calculate (snpindex, g-statistic, ed, fisher exact test(fet))
 	-h             help document
 ```
 ### command line
+```
 perl bsaindex.pl -v snp.indel.vcf -k snp -od bsa -b1 bulk1 -b2 bulk2 -p1 parent1 -p2 parent2 -pt ril -ep 2 -mt all -sf bsa/snp.cisim.xls
-
+```
 direction of delta snpindex, -sf can be ignored and please set -ab T 
 
 ### results
 ├── bsa.all.xls ## all index file
-
 ├── bsa.basic.xls ## used sites informations
-
 ├── bsa.drop.vcf ## dropped sites
-
 ├── bsa.ed.xls ## ed results
-
 ├── bsa.fet.xls ## fisher exact test results
-
 ├── bsa.gst.xls ## g-statistic results
-
 └── bsa.index.xls ## snp-index results
 
 # step 3 slidding windows
@@ -106,11 +102,12 @@ Function: sliding window calculate smooth(mean) of snp index
         -h            help document
 ```
 ### command line
+```
 perl slidewindow.pl bsa/bsa.index.xls -k bsa.index -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3-13 -ms 10
 perl slidewindow.pl bsa/bsa.ed.xls -k bsa.ed -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
 perl slidewindow.pl bsa/bsa.gst.xls -k bsa.gst -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
 perl slidewindow.pl bsa/bsa.fet.xls -k bsa.fet -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3,5 -ms 10 -lg T
-
+```
 fai file can be obtained from samtools fasta index or just add chromosome length manully:
 chr01	18757413
 chr02	15481669
@@ -125,11 +122,8 @@ chr10	12996920
 
 ### results
 ├── bsa.ed.mean.xls ## ed sliding window results
-
 ├── bsa.fet.mean.xls ## fisher exact test sliding window results
-
 ├── bsa.gst.mean.xls ## g-statistic sliding window results
-
 └── bsa.index.mean.xls ## snp-index sliding window results
 
 after this step, you can use cmplot(https://github.com/YinLiLin/CMplot) to plot widow results
@@ -159,6 +153,7 @@ priority:
 lower/upper > thres > alpha > quant
 ```
 ### commad line
+```
 perl qtl_region.pl -i bsa/bsa.index.mean.xls -k bsa.index95 -o bsa/ -chr 1 -value 7 -start 2 -end 3 -lower 8 -upper 9
 perl qtl_region.pl -i bsa/bsa.index.mean.xls -k bsa.index99 -o bsa/ -chr 1 -value 7 -start 2 -end 3 -lower 12 -upper 13
 perl qtl_region.pl -i bsa/bsa.ed.mean.xls -k bsa.ed95 -o bsa/ -chr 1 -start 2 -end 3 -value 5 -quant 95 -type larger
@@ -167,6 +162,6 @@ perl qtl_region.pl -i bsa/bsa.gst.mean.xls -k bsa.gst95 -o bsa/ -chr 1 -start 2 
 perl qtl_region.pl -i bsa/bsa.gst.mean.xls -k bsa.gst99 -o bsa/ -chr 1 -start 2 -end 3 -value 5 -quant 99 -type larger
 perl qtl_region.pl -i bsa/bsa.fet.mean.xls -k bsa.fet0.05 -o bsa/-chr 1 -start 2 -end 3 -value 7 -lthres 0.05 -type smaller
 perl qtl_region.pl -i bsa/bsa.fet.mean.xls -k bsa.fet0.01 -o bsa/-chr 1 -start 2 -end 3 -value 7 -lthres 0.01 -type smaller
-
+```
 ### results
 *.sig.xls ## possible qtl region of each index
