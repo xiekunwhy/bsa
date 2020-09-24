@@ -1,11 +1,17 @@
 # bsa
 Bulked-Segregant Analysis using vcf file with or without parents
-# dependences, you need to install these dependence module from cpan first
+dependences, you need to install these dependence module from cpan first
+
 use Cwd
+
 use Getopt::Long
+
 use Data::Dumper
+
 use File::Basename
+
 use Text::NSP::Measures::2D::Fisher::twotailed
+
 use FindBin
 
 # step 1 do simulation
