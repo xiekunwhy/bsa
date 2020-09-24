@@ -17,6 +17,7 @@ use FindBin
 
 # step 1 do simulation
 simulation_v2.pl and simulation_v2.r must be in the same directory
+
 if you do not care about the direction of delta snpindex, you can skip this step
 ### get help infomation
 perl simulation_v2.pl
@@ -78,7 +79,7 @@ Function: calculate (snpindex, g-statistic, ed, fisher exact test(fet))
 ```
 perl bsaindex.pl -v snp.indel.vcf -k snp -od bsa -b1 bulk1 -b2 bulk2 -p1 parent1 -p2 parent2 -pt ril -ep 2 -mt all -sf bsa/snp.cisim.xls
 ```
-direction of delta snpindex, -sf can be ignored and please set -ab T 
+if you do not care about direction of delta snpindex, -sf can be ignored and set -ab T 
 
 ### results
 ├── bsa.all.xls ## all index file
@@ -122,6 +123,7 @@ perl slidewindow.pl bsa/bsa.gst.xls -k bsa.gst -o bsa/ -f har.fa.fai -w 2000 -s 
 perl slidewindow.pl bsa/bsa.fet.xls -k bsa.fet -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3,5 -ms 10 -lg T
 ```
 fai file can be obtained from samtools fasta index or just add chromosome length manully:
+```
 chr01	18757413
 chr02	15481669
 chr03	14254934
@@ -132,6 +134,7 @@ chr07	13341776
 chr08	13100779
 chr09	13064641
 chr10	12996920
+```
 
 ### results
 ├── bsa.ed.mean.xls ## ed sliding window results
