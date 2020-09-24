@@ -73,11 +73,17 @@ direction of delta snpindex, -sf can be ignored and please set -ab T
 
 ### results
 ├── bsa.all.xls ## all index file
+
 ├── bsa.basic.xls ## used sites informations
+
 ├── bsa.drop.vcf ## dropped sites
+
 ├── bsa.ed.xls ## ed results
+
 ├── bsa.fet.xls ## fisher exact test results
+
 ├── bsa.gst.xls ## g-statistic results
+
 └── bsa.index.xls ## snp-index results
 
 # step 3 slidding windows
@@ -119,8 +125,11 @@ chr10	12996920
 
 ### results
 ├── bsa.ed.mean.xls ## ed sliding window results
+
 ├── bsa.fet.mean.xls ## fisher exact test sliding window results
+
 ├── bsa.gst.mean.xls ## g-statistic sliding window results
+
 └── bsa.index.mean.xls ## snp-index sliding window results
 
 after this step, you can use cmplot(https://github.com/YinLiLin/CMplot) to plot widow results
