@@ -171,7 +171,7 @@ Function: get significant region
 priority:
 lower/upper > thres > alpha > quant
 ```
-### commad line
+### command line
 ```
 perl qtl_region.pl -i bsa/bsa.index.mean.xls -k bsa.index95 -o bsa/ -chr 1 -value 7 -start 2 -end 3 -lower 8 -upper 9
 perl qtl_region.pl -i bsa/bsa.index.mean.xls -k bsa.index99 -o bsa/ -chr 1 -value 7 -start 2 -end 3 -lower 12 -upper 13
