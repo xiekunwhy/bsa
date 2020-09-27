@@ -55,7 +55,7 @@ This script can be used to calculate snp-index/delta snp-index(index), g-statist
 
 For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population (f1/cp), only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used if one parent is absence.
 
-For delta snp-index, the direction is meaningful for bi-parents populations (f2, ril/dh, bc) ony at least one parent is used. And the direction is not meaningful for outcross population (f1/cp) in all case.
+For delta snp-index, the direction is meaningful for bi-parents populations (f2, ril/dh, bc) only at least one parent is used. And the direction is not meaningful for outcross population (f1/cp) in all case.
 
 It is wise to set -ab T when the direction of delta snp-index is not meaningful.
 
