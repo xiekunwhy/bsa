@@ -218,9 +218,9 @@ Function: point and/or line plot.
 ### command line
 ```
 perl point_line_plot.pl -k bsa.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 7,8,9,12,13 -lc "black,#2121D9,#2121D9,#DF0101,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 5 -ym 1*-1 -yx 1 -xl "" -yl "expression(Delta(SNPindex))" -las 2
-/Bio/bin/perl point_line_plot.pl -k bulk1.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 5,10,14 -lc "black,#2121D9,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 3 -ym NULL -yx 1 -xl "" -yl "SNPindex(bulk1)" -las 2
+perl point_line_plot.pl -k bulk1.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 5,10,14 -lc "black,#2121D9,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 3 -ym NULL -yx 1 -xl "" -yl "SNPindex(bulk1)" -las 2
 perl point_line_plot.pl -k bulk2.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 6,11,15 -lc "black,#2121D9,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 4 -ym NULL -yx 1 -xl "" -yl "SNPindex(bulk2)" -las 2
-/Bio/bin/perl point_line_plot.pl -k bsa.ed -f har.fa.fai -od bsa/ -lf bsa/bsa.ed.mean.xls -lp 1,4 -lv 5 -lc "black" -pf bsa/bsa.ed.xls -pp 1,2 -pv 3 -hl 0.149,0.753 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "ED2" -las 2
+perl point_line_plot.pl -k bsa.ed -f har.fa.fai -od bsa/ -lf bsa/bsa.ed.mean.xls -lp 1,4 -lv 5 -lc "black" -pf bsa/bsa.ed.xls -pp 1,2 -pv 3 -hl 0.149,0.753 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "ED2" -las 2
 perl point_line_plot.pl -k bsa.gst -f har.fa.fai -od bsa/ -lf bsa/bsa.gst.mean.xls -lp 1,4 -lv 5 -lc "black" -pf bsa/bsa.gst.xls -pp 1,2 -pv 3 -hl 4.786,6.639 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "G" -las 2
 perl point_line_plot.pl -k bsa.fet -f har.fa.fai -od bsa -lf bsa/bsa.fet.mean.xls -lp 1,4 -lv 6 -lc "black" -pf bsa/bsa.fet.xls -pp 1,2 -pv 4 -hl 1.976,2.833 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "expression(-log[10](italic(p)))" -las 2
 ```
