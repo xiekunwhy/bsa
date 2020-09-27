@@ -20,7 +20,8 @@ use Text::NSP::Measures::2D::Fisher::twotailed
 
 use FindBin
 
-R (only >= v3.60 are tested) also need to be installed.
+
+R (only >= v3.60 were tested) is needed, and [gtools](https://cran.r-project.org/web/packages/gtools/index.html) package is need if you want to use point_line_plot.pl script.
 
 # step 1 do simulation
 simulation_v2.pl and simulation_v2.r must be in the same directory
