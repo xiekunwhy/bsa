@@ -56,7 +56,7 @@ perl simulation_v2.pl -k snp -od bsa -pt ril -s1 50 -s2 50 -md 10 -xd 500 -rb /p
 snp.cisim.xls is the main result file
 
 # step 2 index calculation
-This script can be used to calculate snp-index/delta snp-index(index), g-statistic(gst), euclidean distance(ed) and Fisher-exact test(fet) and some other method(coming soon).
+This script can be used to calculate snp-index/delta snp-index(index), g-statistic(gst), euclidean distance(ed) and Fisher-exact test(fet) and some other methods (coming soon).
 
 For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? or ??xbb sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population (f1/cp), only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used if one parent is absence.
 
