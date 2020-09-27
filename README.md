@@ -1,7 +1,8 @@
 # bsa
-Bulked-Segregant Analysis using vcf file with or without parents
+Bulked-Segregant Analysis using vcf file with or without parents.
 
-dependences, you need to install these dependence module from cpan first
+# Dependences
+You need to install these dependence perl modules from cpan first
 
 use Cwd
 
@@ -15,10 +16,12 @@ use Text::NSP::Measures::2D::Fisher::twotailed
 
 use FindBin
 
+R (only >= v3.60 are tested) also need to be installed.
+
 # step 1 do simulation
 simulation_v2.pl and simulation_v2.r must be in the same directory
 
-if you do not care about the direction of delta snpindex, you can skip this step
+If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril, f2 and bc, you can skip this step.
 ### get help infomation
 perl simulation_v2.pl
 ```
@@ -48,6 +51,22 @@ perl simulation_v2.pl -k snp -od bsa -pt ril -s1 50 -s2 50 -md 10 -xd 500 -rb /p
 snp.cisim.xls is the main result file
 
 # step 2 index calculation
+This script can be used to calculate (snp-index,delta snp-index), g-statistic, and Fisher-exact test.
+
+For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population, only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used when one parent are absence.
+
+For delta snp-index, the direction is meaningful for bi-parents populations (f2, ril/dh, bc) ony at least one parent is used. And the direction is not meaningful for outcross population (f1/cp) in all case.
+
+It is wise to set -ab T when the direction of delta snp-index is not meaningful.
+
+Reference:
+
+SNP-Index and Delta SNP-index, [Fekih R, Takagi H, Tamiru M, et al. MutMap+: genetic mapping and mutant identification without crossing in rice[J]. PloS one, 2013, 8(7): e68529.](https://doi.org/10.1371/journal.pone.0068529)
+
+G-statistic, [Magwene P M, Willis J H, Kelly J K. The statistics of bulk segregant analysis using next generation sequencing[J]. PLoS Comput Biol, 2011, 7(11): e1002255.](https://doi.org/10.1371/journal.pcbi.1002255)
+
+Euclidean distance, [Hill J T, Demarest B L, Bisgrove B W, et al. MMAPPR: mutation mapping analysis pipeline for pooled RNA-seq[J]. Genome research, 2013, 23(4): 687-697.](https://genome.cshlp.org/content/23/4/687.short)
+
 ### get help infomation
 perl bsaindex.pl
 ```
