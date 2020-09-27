@@ -26,7 +26,7 @@ R (only >= v3.60 were tested) is needed, and [gtools](https://cran.r-project.org
 # step 1 do simulation
 simulation_v2.pl and simulation_v2.r must be in the same directory
 
-If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril, f2 and bc, you can skip this step.
+If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril/dh, f2 and bc, you can skip this step.
 ### get help infomation
 perl simulation_v2.pl
 ```
