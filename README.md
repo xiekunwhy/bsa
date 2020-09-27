@@ -1,6 +1,10 @@
 # bsa
 Bulked-Segregant Analysis using vcf file with or without parents.
 
+It's memory effecient and very fast, you can complete the analysis in about one hours  with only <4Gb RAM when there are ~10 millions markers in your vcf file.
+
+The most memory cosuming step is the slidding windows step, because the slidewindow.pl script need to read all avalible sites in index/ed/gst/fet file into RAM.
+
 # Dependences
 You need to install these dependence perl modules from cpan first
 
@@ -39,7 +43,7 @@ Function: simulation and get delta snpindex confidence intervals
         -md  <int>    min depth                      [10]
         -xd  <int>    max depth                      [500]
         -mi  <float>  min snp index                  [0]
-        -rb  <bin>    Rscript bin                    [/Bio/bin/Rscript-3.6.0]
+        -rb  <bin>    Rscript bin                    [/Bio/bin/Rscript]
 
         -h            help document
 ```
