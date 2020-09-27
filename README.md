@@ -173,7 +173,7 @@ chr10	12996920
 └── bsa.index.mean.xls ## snp-index sliding window results
 
 ## step 3.2 plotting
-bsaplot.r, plot.scanone.r, and point_line_plot.pl must be in the same directory.
+bsaplot.r, plot.scanone.r (copy from [R/qtl](https://github.com/kbroman/qtl)), and point_line_plot.pl must be in the same directory.
 
 ### get help infomation
 perl point_line_plot.pl
