@@ -15,6 +15,7 @@ my ($min_depth, $max_depth, $min_index, $pmin_depth, $indel);
 my ($outdir, $key, $abs);
 my ($method, $edpower);
 my ($sim_file, $sim_depth);
+my $rbin;
 GetOptions(
 	"h|?"=>\&help,
 	"v:s"=>\$vcf,
@@ -35,6 +36,7 @@ GetOptions(
 	"sd:s"=>\$sim_depth,
 	"id:s"=>\$indel,
 	"ab:s"=>\$abs,
+	"rb:s"=>\$rbin,
 ) || &help;
 &help unless ($vcf && $bulk1 && $bulk2 && $key && $outdir);
 
@@ -61,6 +63,7 @@ sub help
 	-sd  <str/int> min,max,other number in sf     [max]
 	-id  <T/F>     use(T) indel or not(F)         [F]
 	-ab  <T/F>     output absolutely delta(T)     [F]
+	-rb  <bin>     Rscript bin path               [Rscript]
 	-h             help document
 ";
 	exit;
@@ -140,6 +143,7 @@ $indel ||= "F";
 $abs ||= "F";
 $method ||= "all";
 $edpower ||= 5;
+$rbin ||= "Rscript";
 ####
 my $b1i;
 my $b2i;
@@ -437,7 +441,7 @@ myfet\$Q <- p.adjust(myfet\[,3\], \"BH\")
 write.table(myfet, \"$outdir/$key\.fet.xls\", row.names = F, col.names = T, quote = F, sep = \"\\t\")
 ";
 	close(RS);
-	`Rscript $fetr`;
+	`$rbin $fetr`;
 }
 
 ############# end time ###################
