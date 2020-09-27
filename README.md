@@ -1,7 +1,7 @@
 # bsa
 Bulked-Segregant Analysis using vcf file with or without parents.
 
-It's memory effecient and very fast, you can complete the analysis in about one hours  with only <4Gb RAM when there are ~10 millions markers in your vcf file.
+It's memory effecient and very fast, you can complete the analysis in about one hour  with only < 4Gb RAM when there are ~10 millions markers in your vcf file.
 
 The most memory cosuming step is the slidding windows step, because the slidewindow.pl script need to read all avalible sites in index/ed/gst/fet file into RAM.
 
