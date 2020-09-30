@@ -230,6 +230,8 @@ perl point_line_plot.pl -k bsa.gst -f har.fa.fai -od bsa/ -lf bsa/bsa.gst.mean.x
 perl point_line_plot.pl -k bsa.fet -f har.fa.fai -od bsa -lf bsa/bsa.fet.mean.xls -lp 1,4 -lv 6 -lc "black" -pf bsa/bsa.fet.xls -pp 1,2 -pv 4 -hl 1.976,2.833 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "expression(-log[10](italic(p)))" -las 2
 ```
 
+for -hl option, you need to calculate these values using quantile/percentile or other method first, or you just run qtl_region.pl first, and the corresponding value will be printed in the standard output.
+
 fai file here ony contain chr/scaffolds use for plotting.
 
 # step 4 get qtl region
