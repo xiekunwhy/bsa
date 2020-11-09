@@ -551,7 +551,7 @@ sub filter_missing()
 	return $state;
 }
 
-# filter genotype
+# filter depth
 sub filter_depth()
 {
 	my ($info) = @_;
@@ -563,7 +563,9 @@ sub filter_depth()
 	$b2sum += $b2ad[1];
 	my $state = "pass";
 	## bulk depth filter
-	if(defined $parent1 && $parent1 ne $bulk1){ ## for bsa
+	if(defined $parent1 && $parent1 eq $bulk1){ ## for mutmap
+		# nothing	
+	}else{ ## for bsa
 		if($b1sum < $min_depth){
 			$state = "B1depthL";
 			return ($state);
@@ -571,8 +573,6 @@ sub filter_depth()
 			$state = "B1depthH";
 			return ($state);
 		}
-	}else{ ## for mutmap
-		# nothing
 	}
 
 	if($b2sum < $min_depth){
