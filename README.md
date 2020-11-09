@@ -1,6 +1,10 @@
 # bsa
 Bulked-Segregant Analysis using vcf file with or without parents.
 
+It's memory effecient and very fast, you can complete the analysis in about one hour  with only < 4Gb RAM when there are ~10 millions markers in your vcf file.
+
+The most memory cosuming step is the slidding windows step, because the slidewindow.pl script need to read all avalible sites in index/ed/gst/fet file into RAM.
+
 # Dependences
 You need to install these dependence perl modules from cpan first
 
@@ -16,12 +20,13 @@ use Text::NSP::Measures::2D::Fisher::twotailed
 
 use FindBin
 
-R (only >= v3.60 are tested) also need to be installed.
+
+R (only >= v3.60 were tested) is needed, and [gtools](https://cran.r-project.org/web/packages/gtools/index.html) package is needed if you want to use point_line_plot.pl script.
 
 # step 1 do simulation
 simulation_v2.pl and simulation_v2.r must be in the same directory
 
-If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril, f2 and bc, you can skip this step.
+If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril/dh, f2 and bc, you can skip this step.
 ### get help infomation
 perl simulation_v2.pl
 ```
@@ -39,7 +44,7 @@ Function: simulation and get delta snpindex confidence intervals
         -md  <int>    min depth                      [10]
         -xd  <int>    max depth                      [500]
         -mi  <float>  min snp index                  [0]
-        -rb  <bin>    Rscript bin                    [/Bio/bin/Rscript-3.6.0]
+        -rb  <bin>    Rscript bin                    [/Bio/bin/Rscript]
 
         -h            help document
 ```
@@ -51,11 +56,11 @@ perl simulation_v2.pl -k snp -od bsa -pt ril -s1 50 -s2 50 -md 10 -xd 500 -rb /p
 snp.cisim.xls is the main result file
 
 # step 2 index calculation
-This script can be used to calculate snp-index/delta snp-index(index), g-statistic(gst), euclidean distance(ed) and Fisher-exact test(fet).
+This script can be used to calculate snp-index/delta snp-index(index), g-statistic(gst), euclidean distance(ed) and Fisher-exact test(fet) and some other methods (coming soon).
 
-For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population (f1/cp), only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used if one parent is absence.
+For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? or ??xbb sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population (f1/cp), only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used if one parent is absence.
 
-For delta snp-index, the direction is meaningful for bi-parents populations (f2, ril/dh, bc) ony at least one parent is used. And the direction is not meaningful for outcross population (f1/cp) in all case.
+For delta snp-index, the direction is meaningful for bi-parents populations (f2, ril/dh, bc) only at least one parent is used. And the direction is not meaningful for outcross population (f1/cp) in all case.
 
 It is wise to set -ab T when the direction of delta snp-index is not meaningful.
 
@@ -115,7 +120,10 @@ if you do not care about direction of delta snpindex, -sf can be ignored and set
 
 └── bsa.index.xls ## snp-index results
 
-# step 3 slidding windows
+# step 3 slidding windows and plot
+
+## step 3.1 slidding windows
+
 ### get help infomation
 perl slidewindow.pl
 ```
@@ -164,10 +172,72 @@ chr10	12996920
 
 └── bsa.index.mean.xls ## snp-index sliding window results
 
-after this step, you can use cmplot(https://github.com/YinLiLin/CMplot) to plot window results
+## step 3.2 plotting
+bsaplot.r, plot.scanone.r (copy from [R/qtl](https://github.com/kbroman/qtl)), and point_line_plot.pl must be in the same directory.
+
+### get help infomation
+perl point_line_plot.pl
+
+Don't be afraid of seeing so many options, just some of them are required!
+
+```
+Function: point and/or line plot.
+
+	-k   <str>    output prefix                       [force]
+	-f   <file>   genome fai file                     [force]
+	-od  <dir>    output directory                    [force]
+	-sd  <dir>    shell directory                     [od]
+	-ch  <str>    chr name(s) use for plotting        [optional]
+	-cm  <int>    chr start position                  [1]
+	-lf  <file>   line plot file                      [NULL]
+	-lp  <ints>   line file chr,pos columns           [1,2]
+	-lv  <ints>   line file values columns            [3,4,5,6,7]
+	-lc  <color>  line plot colors (len(lc)==len(lv)) [black,blue,red,blue,red]
+	-pf  <file>   point plot file                     [NULL]
+	-pp  <ints>   point plot chr,pos columns          [1,2]
+	-pv  <ints>   point plot values columns           [3]
+	-pc  <colors> point colors                        [#33A02C,#FF7F00]
+	-hl  <float>  horizon line position               [0]
+	-hc  <color>  horizon line color                  [grey]
+	-ht  <int>    horizon line type(R)                [1]
+	-cg  <int>    gap between chromosomes             [0]
+	-ym  <float>  ymin                                [1*-1]
+	-yx  <float>  ymax                                [1]
+	-xl  <str>    xlab                                [Chromosome]
+	-yl  <str>    ylab                                [expression(Delta(SNPindex))]
+	-ca  <float>  axis cex                            [1.5]
+	-cl  <float>  labels cex                          [2]
+	-cp  <float>  point cex                           [0.3]
+	-pch <int>    point type(R)                       [19]
+	-lwd <float>  line width                          [2.5]
+	-las <1/2>    parallele(1)/vertical(2) x-axis lab [1]
+	-bdc <color>  band color(for distinguish chrs)    [grey90]
+	-alt <T/F>    alt chr labels(avoid overlaping)    [F]
+	-width  <int> plot width in inches                [15]
+	-height <int> plot height in inches               [6]
+	-res    <int> png resolution ratio                [300]
+	-rb  <bin>    Rscript bin                         [/Bio/bin/Rscript-3.6.0]
+
+	-h            help document
+```
+### command line
+```
+perl point_line_plot.pl -k bsa.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 7,8,9,12,13 -lc "black,#2121D9,#2121D9,#DF0101,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 5 -ym 1*-1 -yx 1 -xl "" -yl "expression(Delta(SNPindex))" -las 2
+perl point_line_plot.pl -k bulk1.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 5,10,14 -lc "black,#2121D9,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 3 -ym NULL -yx 1 -xl "" -yl "SNPindex(bulk1)" -las 2
+perl point_line_plot.pl -k bulk2.index -f har.fa.fai -od bsa/ -lf bsa/bsa.index.mean.xls -lp 1,4 -lv 6,11,15 -lc "black,#2121D9,#DF0101" -pf bsa/bsa.index.xls -pp 1,2 -pv 4 -ym NULL -yx 1 -xl "" -yl "SNPindex(bulk2)" -las 2
+perl point_line_plot.pl -k bsa.ed -f har.fa.fai -od bsa/ -lf bsa/bsa.ed.mean.xls -lp 1,4 -lv 5 -lc "black" -pf bsa/bsa.ed.xls -pp 1,2 -pv 3 -hl 0.149,0.753 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "ED2" -las 2
+perl point_line_plot.pl -k bsa.gst -f har.fa.fai -od bsa/ -lf bsa/bsa.gst.mean.xls -lp 1,4 -lv 5 -lc "black" -pf bsa/bsa.gst.xls -pp 1,2 -pv 3 -hl 4.786,6.639 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "G" -las 2
+perl point_line_plot.pl -k bsa.fet -f har.fa.fai -od bsa -lf bsa/bsa.fet.mean.xls -lp 1,4 -lv 6 -lc "black" -pf bsa/bsa.fet.xls -pp 1,2 -pv 4 -hl 1.976,2.833 -hc "#2121D9,#DF0101" -ht 1,1 -ym 0 -yx NULL -xl "" -yl "expression(-log[10](italic(p)))" -las 2
+```
+
+for -hl option, you need to calculate these values using quantile/percentile or other method first, or you just run qtl_region.pl first, and the corresponding value will be printed in the standard output.
+
+fai file here ony contain chr/scaffolds use for plotting.
 
 # step 4 get qtl region
 ### get help infomation
+perl qtl_region.pl
+
 ```
 Function: get significant region
 
