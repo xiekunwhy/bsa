@@ -1,5 +1,5 @@
 # bsa
-Bulked-Segregant Analysis using vcf file with or without parents(you can it vcfbsa).
+Bulked-Segregant Analysis using vcf file with or without parents(you can call it vcfbsa), you don't need to construct parent's reference to call snp and don't to polarize alleles first to make direction of delta-snpindex meaningful.
 
 It's memory effecient and very fast, you can complete the analysis in about one hour  with only < 4Gb RAM when there are ~10 millions markers in your vcf file.
 
