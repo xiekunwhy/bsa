@@ -1,5 +1,5 @@
 # bsa
-Bulked-Segregant Analysis using vcf file with or without parents.
+Bulked-Segregant Analysis using vcf file with or without parents(you can it vcfbsa).
 
 It's memory effecient and very fast, you can complete the analysis in about one hour  with only < 4Gb RAM when there are ~10 millions markers in your vcf file.
 
