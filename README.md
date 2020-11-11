@@ -64,7 +64,7 @@ For delta snp-index, the direction is meaningful for bi-parents populations (f2,
 
 It is wise to set -ab T when the direction of delta snp-index is not meaningful.
 
-For mutmap, please give the same sample name for -b1 and -p1.
+For mutmap, please give the same sample name for -b1 and -p1(dominant/wild parent), the index of bulk1(dominant/wild parent actually) will not be calculated.
 
 Reference:
 
