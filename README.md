@@ -25,39 +25,7 @@ use FindBin
 
 R (only >= v3.60 were tested) is needed, and [gtools](https://cran.r-project.org/web/packages/gtools/index.html) package is needed if you want to use point_line_plot.pl script.
 
-# step 1 do simulation
-simulation_v2.pl and simulation_v2.r must be in the same directory
-
-If you do not care about the direction of delta snpindex or two parents are absence or population type is not one of ril/dh, f2 and bc, you can skip this step.
-### get help infomation
-perl simulation_v2.pl
-```
-Function: simulation and get delta snpindex confidence intervals
-        for given population type(f2, ril, bc1), depth and bulk size.
-
-        -k   <str>    output prefix                  [force]
-        -od  <dir>    output directory               [force]
-        -pt  <str>    pop type (f2, ril, bc)         [force]
-        -sd  <dir>    shell dir                      [od]
-        -s1  <str>    bulk1(dominant/wild) size      [30]
-        -s2  <str>    bulk2(recessive/mutant) size   [30]
-        -rp  <int>    replications number            [10000]
-        -ci  <int>    confidence intervals           [95,99]
-        -md  <int>    min depth                      [10]
-        -xd  <int>    max depth                      [500]
-        -mi  <float>  min snp index                  [0]
-        -rb  <bin>    Rscript bin                    [/Bio/bin/Rscript]
-
-        -h            help document
-```
-### command line
-```
-perl simulation_v2.pl -k snp -od bsa -pt ril -s1 50 -s2 50 -md 10 -xd 500 -rb /path/to/your/Rscript
-```
-### results
-snp.cisim.xls is the main result file
-
-# step 2 index calculation
+# BSA calculations
 This script can be used to calculate snp-index/delta snp-index(index), g-statistic(gst), euclidean distance(ed) and Fisher-exact test(fet) and some other methods (coming soon).
 
 For bi-parents populations (f2, ril/dh, bc), only aaxbb sites are used when two parents are avalible, only aax?? or ??xbb sites are used when only one parent is avalible, and all sites are used when two parents are absence. For outcross population (f1/cp), only lmxll nnxnp and hkxhk sites are used when two parents are avalible, and all sites are used if one parent is absence.
@@ -124,9 +92,9 @@ if you do not care about direction of delta snpindex, -sf can be ignored and set
 
 └── bsa.index.xls ## snp-index results
 
-# step 3 slidding windows and plot
+# sliding windows and ploting
 
-## step 3.1 slidding windows
+## step 1 sliding windows
 
 ### get help infomation
 perl slidewindow.pl
@@ -148,10 +116,10 @@ Function: sliding window calculate smooth(mean) of snp index
 ```
 ### command line
 ```
-perl slidewindow.pl bsa/bsa.index.xls -k bsa.index -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3-13 -ms 10
-perl slidewindow.pl bsa/bsa.ed.xls -k bsa.ed -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
-perl slidewindow.pl bsa/bsa.gst.xls -k bsa.gst -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
-perl slidewindow.pl bsa/bsa.fet.xls -k bsa.fet -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3,5 -ms 10 -lg T
+perl slidewindow.pl -i bsa/bsa.index.xls -k bsa.index -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3-13 -ms 10
+perl slidewindow.pl -i bsa/bsa.ed.xls -k bsa.ed -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
+perl slidewindow.pl -i bsa/bsa.gst.xls -k bsa.gst -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3 -ms 10
+perl slidewindow.pl -i bsa/bsa.fet.xls -k bsa.fet -o bsa/ -f har.fa.fai -w 2000 -s 10 -cp 1,2 -cv 3,5 -ms 10 -lg T
 ```
 fai file can be obtained from samtools fasta index or just add chromosome length manully:
 ```
@@ -176,7 +144,7 @@ chr10	12996920
 
 └── bsa.index.mean.xls ## snp-index sliding window results
 
-## step 3.2 plotting
+## step 2 plotting
 bsaplot.r, plot.scanone.r (copy from [R/qtl](https://github.com/kbroman/qtl)), and point_line_plot.pl must be in the same directory.
 
 ### get help infomation
@@ -238,7 +206,7 @@ for -hl option, you need to calculate these values using quantile/percentile or 
 
 fai file here ony contain chr/scaffolds use for plotting.
 
-# step 4 get qtl region
+#  get qtl region
 ### get help infomation
 perl qtl_region.pl
 
