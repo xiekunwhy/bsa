@@ -149,12 +149,12 @@ foreach my $chr (@chroma) {
 	my @vsum;
 	## i-th window
 	for (my $i = 0; ($step * $i + $window) < $chromh{$chr}; $i++) { # i = i-th window 
-		foreach my $j (@pos){
-			if($j >= $step * $i && $j < $step * $i + $window){
+		for (my $j=0;$j < @pos ; $j++){
+			if($pos[$j] >= $step * $i && $pos[$j] < $step * $i + $window){
 				$nsnp++;
-				my @line = @{$data{$chr}{$j}};
+				my @line = @{$data{$chr}{$pos[$j]}};
 				if(@line > @vindex){
-					die("ERROR: $chr $j value count larger than value index number!\n");
+					die("ERROR: $chr $pos[$j] value count larger than value index number!\n");
 				}
 				for (my $v = 0; $v < @line; $v++) {
 					if(defined $vsum[$v]){
@@ -164,8 +164,9 @@ foreach my $chr (@chroma) {
 					}
 				}
 			}
-			if($j < $step * ($i + 1)){
+			if($pos[$j] < $step * ($i + 1)){
 				shift @pos;
+				$j--;
 			}
 		}
 		push (@ieffect, $i);
