@@ -149,8 +149,6 @@ foreach my $chr (@chroma) {
 	my @vsum;
 	## i-th window
 	for (my $i = 0; ($step * $i + $window) < $chromh{$chr}; $i++) { # i = i-th window 
-		$nsnp = 0;
-		@vsum = ();
 		foreach my $j (@pos){
 			if($j >= $step * $i && $j < $step * $i + $window){
 				$nsnp++;
@@ -192,6 +190,8 @@ foreach my $chr (@chroma) {
 			my $wend = $wstart + $window - 1;
 			my $wmid = int(($wstart + $wend)/2);
 			print OUT "$chr\t$wstart\t$wend\t$wmid\t", join("\t", @vmean), "\n";
+			$nsnp = 0;
+			@vsum = ();
 		}else{
 			# merge into next window
 		}
