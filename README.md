@@ -5,7 +5,7 @@ It's memory effecient and very fast, you can complete the analysis in about one 
 
 The most memory cosuming step is the slidding windows step, because the slidewindow.pl script need to read all avalible sites in index/ed/gst/fet file into RAM.
 
-Can also be used for mutmap analysis(just give the same name for -b1 and -p1 in step 2).
+Can also be used for mutmap analysis(just give the same name for -b1 and -p1 when calcualte index).
 
 # Dependences
 You need to install these dependence perl modules from cpan first
@@ -44,6 +44,37 @@ G-statistic, [Magwene P M, Willis J H, Kelly J K. The statistics of bulk segrega
 
 Euclidean distance, [Hill J T, Demarest B L, Bisgrove B W, et al. MMAPPR: mutation mapping analysis pipeline for pooled RNA-seq[J]. Genome research, 2013, 23(4): 687-697.](https://genome.cshlp.org/content/23/4/687.short)
 
+## step 1 simulation
+### get help infomation
+perl simulation_v2.pl
+```
+Function: simulation and get delta snpindex confidence intervals
+	for given population type(f2, ril, bc1), depth and bulk size.
+
+	-k   <str>    output prefix                  [force]
+	-od  <dir>    output directory               [force]
+	-pt  <str>    pop type (f2, ril, bc)         [force]
+	-sd  <dir>    shell dir                      [od]
+	-s1  <str>    bulk1(dominant/wild) size      [30]
+	-s2  <str>    bulk2(recessive/mutant) size   [30]
+	-rp  <int>    replications number            [10000]
+	-ci  <int>    confidence intervals           [95,99]
+	-md  <int>    min depth                      [10]
+	-xd  <int>    max depth                      [500]
+	-mi  <float>  min snp index                  [0]
+	-rb  <bin>    Rscript bin                    [/Bio/bin/Rscript-3.6.0]
+
+	-h            help document
+```
+### command line
+```
+perl simulation_v2.pl -k bsa -od bsa -pt ril -s1 30 -s2 30 -rp 10000 -ci 95,99 -md 10 -xd 500 -mi 0 -rb /path/to/Rscript
+```
+
+### results
+\*.cisim.xls
+
+## step 2 bsa calculation
 ### get help infomation
 perl bsaindex.pl
 ```
