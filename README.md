@@ -235,7 +235,7 @@ perl point_line_plot.pl -k bsa.fet -f har.fa.fai -od bsa -lf bsa/bsa.fet.mean.xl
 
 for -hl option, you need to calculate these values using quantile/percentile or other method first, or you just run qtl_region.pl first, and the corresponding value will be printed in the standard output.
 
-fai file here ony contain chr/scaffolds use for plotting.
+fai file here only contain chr/scaffolds use for plotting.
 
 #  get qtl region
 ### get help infomation
