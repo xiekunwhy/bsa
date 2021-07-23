@@ -5,7 +5,7 @@ It's memory effecient and very fast, you can complete the analysis in about one 
 
 The most memory cosuming step is the slidding windows step, because the slidewindow.pl script need to read all avalible sites in index/ed/gst/fet file into RAM.
 
-Can also be used for mutmap analysis(just give the same name for -b1 and -p1 when calcualte index).
+Can also be used for mutmap analysis(just give the same name for -b1 and -p1 when calculate index).
 
 # Dependences
 You need to install these dependence perl modules from cpan first
