@@ -147,6 +147,7 @@ foreach my $chr (@chroma) {
 	my $last_start = 0;
 	my $nsnp = 0;
 	my @vsum;
+	my $formerI = 0;
 	## i-th window
 	for (my $i = 0; ($step * $i + $window) < $chromh{$chr}; $i++) { # i = i-th window 
 		for (my $j=0;$j < @pos ; $j++){
@@ -193,7 +194,10 @@ foreach my $chr (@chroma) {
 			print OUT "$chr\t$wstart\t$wend\t$wmid\t", join("\t", @vmean), "\n";
 			$nsnp = 0;
 			@vsum = ();
+			$formerI = $i;
 		}else{
+			$nsnp = 0;
+			@vsum = ();
 			# merge into next window
 		}
 		$last_start = $step * $ieffect[-1] + 1;
