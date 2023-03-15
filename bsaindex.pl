@@ -222,13 +222,16 @@ while (<$fin>) {
 		}
 		if(defined $parent1 && $parent1 eq $bulk1){ ## for mutmap
 			$head .= "\t$samples[$p1i]";
+			$head .= "\t$samples[$p1i]_AD";
 		}else{ ## bsa
 			if($pflag == 1){
 				$head .= "\t$samples[$p1i]";
+				$head .= "\t$samples[$p1i]_AD";
 			}elsif($pflag == 2){
 				$head .= "\t$samples[$p2i]";
+				$head .= "\t$samples[$p2i]_AD";
 			}elsif($pflag == 3){
-				$head .= "\t$samples[$p1i]\t$samples[$p2i]";
+				$head .= "\t$samples[$p1i]\t$samples[$p1i]_AD\t$samples[$p2i]\t$samples[$p2i]_AD";
 			}
 			$head .= "\t$samples[$b1i]\_GT\t$samples[$b1i]\_AD";
 		}
@@ -326,18 +329,18 @@ while (<$fin>) {
 	## out info
 	my $outline = "$chr\t$pos\t$ref\t$alt\t$type";
 	if(defined $parent1 && $parent1 eq $bulk1){ ## for mutmap
-		$outline .= "\t$info{p1}{g}\t$info{b2}{g}\t$info{b2}{a}";
+		$outline .= "\t$info{p1}{g}\t$info{p1}{a}\t$info{b2}{g}\t$info{b2}{a}";
 	}else{ ## for bsa
 		if($pflag == 0){
 			$outline .= "\t$info{b1}{g}\t$info{b1}{a}\t$info{b2}{g}\t$info{b2}{a}";
 		}elsif($pflag == 1){
-			$outline .= "\t$info{p1}{g}\t$info{b1}{g}\t$info{b1}{a}";
+			$outline .= "\t$info{p1}{g}\t$info{p1}{a}\t$info{b1}{g}\t$info{b1}{a}";
 			$outline .= "\t$info{b2}{g}\t$info{b2}{a}";
 		}elsif($pflag == 2){
-			$outline .= "\t$info{p2}{g}\t$info{b1}{g}\t$info{b1}{a}";
+			$outline .= "\t$info{p2}{g}\t$info{p1}{a}\t$info{b1}{g}\t$info{b1}{a}";
 			$outline .= "\t$info{b2}{g}\t$info{b2}{a}";
 		}elsif($pflag == 3){
-			$outline .= "\t$info{p1}{g}\t$info{p2}{g}";
+			$outline .= "\t$info{p1}{g}\t$info{p1}{a}\t$info{p2}{g}\t$info{p2}{a}";
 			$outline .= "\t$info{b1}{g}\t$info{b1}{a}\t$info{b2}{g}\t$info{b2}{a}";
 		}
 	}
@@ -665,7 +668,7 @@ sub filter_genotype()
 				$state = "Pgenotype";
 			}
 		}else{
-			if($p1 eq $p2 && $p3 eq $p4){
+			if($p1 eq $p2 && $p3 eq $p4 && $pflag == 3){
 				$state = "Pgenotype";
 			}
 		}
