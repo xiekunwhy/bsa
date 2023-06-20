@@ -337,7 +337,7 @@ while (<$fin>) {
 			$outline .= "\t$info{p1}{g}\t$info{p1}{a}\t$info{b1}{g}\t$info{b1}{a}";
 			$outline .= "\t$info{b2}{g}\t$info{b2}{a}";
 		}elsif($pflag == 2){
-			$outline .= "\t$info{p2}{g}\t$info{p1}{a}\t$info{b1}{g}\t$info{b1}{a}";
+			$outline .= "\t$info{p2}{g}\t$info{p2}{a}\t$info{b1}{g}\t$info{b1}{a}";
 			$outline .= "\t$info{b2}{g}\t$info{b2}{a}";
 		}elsif($pflag == 3){
 			$outline .= "\t$info{p1}{g}\t$info{p1}{a}\t$info{p2}{g}\t$info{p2}{a}";
