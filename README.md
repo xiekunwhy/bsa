@@ -279,4 +279,5 @@ perl qtl_region.pl -i bsa/bsa.fet.mean.xls -k bsa.fet0.01 -o bsa/-chr 1 -start 2
 
 ## cited by
 Guo J, Qi F, Qin L, et al. Mapping of a QTL associated with sucrose content in peanut kernels using BSA-seq[J]. Frontiers in Genetics, 2023, 13: 1089389.
+
 Liu H, Zheng Z, Sun Z, et al. Identification of two major QTLs for pod shell thickness in peanut (Arachis hypogaea L.) using BSA-seq analysis[J]. BMC genomics, 2024, 25(1): 65.
