@@ -281,3 +281,7 @@ perl qtl_region.pl -i bsa/bsa.fet.mean.xls -k bsa.fet0.01 -o bsa/-chr 1 -start 2
 [Guo J, Qi F, Qin L, et al. Mapping of a QTL associated with sucrose content in peanut kernels using BSA-seq[J]. Frontiers in Genetics, 2023, 13: 1089389.](https://www.frontiersin.org/journals/genetics/articles/10.3389/fgene.2022.1089389/full)
 
 [Liu H, Zheng Z, Sun Z, et al. Identification of two major QTLs for pod shell thickness in peanut (Arachis hypogaea L.) using BSA-seq analysis[J]. BMC genomics, 2024, 25(1): 65.](https://link.springer.com/article/10.1186/s12864-024-10005-x)
+
+[Sun B, Dong Z, ZHANG F, et al. Molecular Regulation of Winter Bud Dormancy in Mulberry (Morus spp.) through the MaSVP-MaBGA Signaling Module[J]. Plant Physiology and Biochemistry, 2026: 111128.](https://www.sciencedirect.com/science/article/pii/S0981942826001142)
+
+[Sun B, Dong Z, Zhang F, et al. Integrated BSA-Seq and WGCNA Analyses Reveal Candidate Genes Associated with Winter Bud Dormancy Maintenance in Fruit Mulberry (Morus spp.)[J]. Current Issues in Molecular Biology, 2025, 48(1): 38.](https://www.mdpi.com/1467-3045/48/1/38)
